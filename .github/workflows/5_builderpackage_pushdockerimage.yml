@@ -4,7 +4,14 @@ name: Build and push Docker image
 # This workflow runs when any of the following occur:
 # - Run manually
 # - Invoked from another workflow
+# - Code pushed to the repository
+
 on:
+  push: 
+    branches:
+      - '*'
+    paths-ignore:
+      - '**/*.md' 
   workflow_dispatch:
     inputs:
       revision:
