@@ -1,5 +1,8 @@
 name: Link Checker
 on:
+  push: 
+    branches:
+      - '*' 
   schedule:
     - cron:  '0 0 * * *'
 permissions:
