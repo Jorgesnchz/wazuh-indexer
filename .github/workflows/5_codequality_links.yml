@@ -9,7 +9,6 @@ permissions:
   contents: read # to fetch code (actions/checkout)
 jobs:
   linkchecker:
-    if: github.repository == 'opensearch-project/OpenSearch'
     runs-on: ubuntu-latest
 
     steps:
