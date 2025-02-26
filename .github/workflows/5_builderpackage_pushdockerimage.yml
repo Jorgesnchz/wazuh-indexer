@@ -1,17 +1,18 @@
 run-name: Build Wazuh Indexer Docker image | ${{ inputs.id }}
-name: Build and push Docker image 
+name: Build and push Docker image
 
 # This workflow runs when any of the following occur:
 # - Run manually
 # - Invoked from another workflow
-# - Code pushed to the repository
+# - Any change
 
 on:
-  push: 
+  push:
     branches:
       - '*'
-    paths-ignore:
-      - '**/*.md' 
+  pull_request:
+    branches:
+      - '*'
   workflow_dispatch:
     inputs:
       revision:
@@ -85,15 +86,15 @@ on:
 
 jobs:
   call-build-workflow:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/5_builderpackage_wazuh-indexer.yml
     with:
-      revision: ${{ inputs.revision || '0'}}
-      is_stage: ${{ inputs.is_stage || false}}
+      revision: ${{ inputs.revision }}
+      is_stage: ${{ inputs.is_stage }}
       distribution: '[ "tar" ]'
       architecture: '[ "x64" ]'
       id: ${{ inputs.id }}
-      wazuh_plugins_ref: ${{ inputs.wazuh_plugins_ref || 'main'}}
-      reporting_plugin_ref: ${{ inputs.reporting_plugin_ref || 'main'}}
+      wazuh_plugins_ref: ${{ inputs.wazuh_plugins_ref }}
+      reporting_plugin_ref: ${{ inputs.reporting_plugin_ref }}
     secrets: inherit
 
   build-and-push-docker-image:
