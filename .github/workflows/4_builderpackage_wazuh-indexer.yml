@@ -160,7 +160,7 @@ jobs:
           bash packaging_scripts/assemble.sh \
             -a ${{ matrix.architecture }} \
             -d ${{ matrix.distribution }} \
-            -r ${{ inputs.revision }}
+            -r ${{ inputs.revision || '0'}}
 
       - name: Test RPM package
         if: ${{ matrix.distribution == 'rpm' }}
