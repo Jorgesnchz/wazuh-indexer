@@ -1,10 +1,14 @@
-run-name: Build ${{ inputs.distribution }} Wazuh Indexer on ${{ inputs.architecture }} | ${{ inputs.id }}
+run-name: Build ${{ inputs.distribution || '[ "rpm", "deb" ]' }} Wazuh Indexer on ${{ inputs.architecture || '[ "x64" ]' }} | ${{ inputs.id }}
 name: Build packages (on demand)
 
 # This workflow runs when any of the following occur:
 # - Run manually
 # - Invoked from another workflow
+# - when a pull request (pr) is created or updated that targets a branch starting with "4."
 on:
+  pull_request:
+    branches:
+      - 4.*
   workflow_dispatch:
     inputs:
       revision:
@@ -95,8 +99,8 @@ jobs:
       - id: setup
         run: |
           matrix=$(jq -cn \
-              --argjson distribution '${{ inputs.distribution }}' \
-              --argjson architecture '${{ inputs.architecture }}' \
+              --argjson distribution '${{ inputs.distribution || '[ "rpm", "deb" ]' }}' \
+              --argjson architecture '${{ inputs.architecture || '[ "x64" ]' }}' \
               '{distribution: $distribution, architecture: $architecture}'
           )
           echo "matrix=$matrix" >> $GITHUB_OUTPUT
@@ -127,8 +131,8 @@ jobs:
           name=$(bash packaging_scripts/baptizer.sh -m \
             -a ${{ matrix.architecture }} \
             -d ${{ matrix.distribution }}  \
-            -r ${{ inputs.revision }} \
-            ${{ inputs.is_stage && '-x' || '' }} \
+            -r ${{ inputs.revision || '0' }} \
+            ${{ inputs.is_stage && github.event_name != 'pull_request' && '-x' || '' }} \
           )
           echo "name=$name" >> $GITHUB_OUTPUT
         id: min_package
@@ -138,8 +142,8 @@ jobs:
           name=$(bash packaging_scripts/baptizer.sh \
             -a ${{ matrix.architecture }} \
             -d ${{ matrix.distribution }}  \
-            -r ${{ inputs.revision }} \
-            ${{ inputs.is_stage && '-x' || '' }} \
+            -r ${{ inputs.revision || '0' }} \
+            ${{ inputs.is_stage && github.event_name != 'pull_request' && '-x' || '' }} \
           )
           echo "name=$name" >> $GITHUB_OUTPUT
         id: package
