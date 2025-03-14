@@ -8,9 +8,7 @@ jobs:
   verify-signed-commits:
     # if: github.repository == 'wazuh/wazuh-indexer'
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
     steps:
-      - uses: semcelik/commit-author-action@master
-        with:
-            signed_commits: 'true'
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            error_on_fail: 'true'
+      - uses: 1Password/check-signed-commits-action@v1
