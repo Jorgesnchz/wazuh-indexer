@@ -41,10 +41,10 @@
       - [Distribution Download Plugin](#distribution-download-plugin)
     - [Creating fat-JAR of a Module](#creating-fat-jar-of-a-module)
   - [Components](#components)
-    - [Build Libraries & Interfaces](#build-libraries--interfaces)
-    - [Clients & Libraries](#clients--libraries)
+    - [Build Libraries \& Interfaces](#build-libraries--interfaces)
+    - [Clients \& Libraries](#clients--libraries)
     - [Plugins](#plugins-1)
-    - [Indexing & Search](#indexing--search)
+    - [Indexing \& Search](#indexing--search)
     - [Aggregations](#aggregations)
     - [Distributed Framework](#distributed-framework)
   - [Misc](#misc)
@@ -177,7 +177,7 @@ If the full test suite fails you may want to start with a smaller set.
 ```
 
 ### Run OpenSearch
-
+assa
 Run OpenSearch using `gradlew run`.
 
 ```
