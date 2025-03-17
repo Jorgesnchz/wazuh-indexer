@@ -61,6 +61,10 @@ on:
         description: "Branch, commit or tag for the wazuh-indexer-reporting repository."
         type: string
         default: "main"
+      previous_version:
+        description: "Previous version of the package."
+        type: string
+        default: "4.10.0"
   workflow_call:
     inputs:
       revision:
@@ -91,6 +95,10 @@ on:
       reporting_plugin_ref:
         type: string
         default: "main"
+      previous_version:
+        description: "Previous version of the package."
+        type: string
+        default: "4.10.0"
     secrets:
       CI_INTERNAL_DEVELOPMENT_BUCKET_USER_ACCESS_KEY:
         required: true
@@ -102,6 +110,7 @@ on:
       name:
         description: Name of the package built.
         value: ${{ jobs.build.outputs.name }}
+    
 
 # ==========================
 # Bibliography
@@ -305,7 +314,7 @@ jobs:
           image: redhat/ubi9:latest
           options: -v ${{ github.workspace }}/artifacts/dist:/artifacts/dist
           run: |
-            bash build-scripts/indexer-node-install.sh
+            bash build-scripts/indexer-node-install.sh ${{ inputs.previous_version }}
             systemctl stop wazuh-indexer
             yum localinstall "/artifacts/dist/${{ steps.package.outputs.name }}" -y
             systemctl daemon-reload
@@ -315,7 +324,7 @@ jobs:
       - name: Test DEB package
         if: ${{ matrix.distribution == 'deb' }}
         run: |
-          bash build-scripts/indexer-node-install.sh
+          bash build-scripts/indexer-node-install.sh ${{ inputs.previous_version }}
           systemctl stop wazuh-indexer
           sudo dpkg -i "artifacts/dist/${{ steps.package.outputs.name }}"
           systemctl daemon-reload
