@@ -2,7 +2,7 @@
 
 # This script tests the Wazuh indexer node installation.
 #
-# For additional information, please refer to the Wazuh documentation:
+# For additional information, please refer to the Wazuh documentation
 #   - https://documentation.wazuh.com/current/installation-guide/wazuh-indexer/index.html
 #
 # Usage: test-indexer-node.sh
