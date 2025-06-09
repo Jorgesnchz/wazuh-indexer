@@ -131,7 +131,7 @@ jobs:
           echo "version=$(bash ./build-scripts/product_version.sh)" >> "$GITHUB_OUTPUT"
 
           # Extracts the Opensearch version using the upstream-version.sh script
-          opensearch_version=$(bash ./build-scripts/upstream-version.sh) >> "$GITHUB_OUTPUT"
+          opensearch_version=$(bash ./build-scripts/upstream-version.sh)
           echo "opensearch_version=$opensearch_version" >> "$GITHUB_OUTPUT"
   
   get-versions-wazuh-indexer-plugins:
@@ -153,6 +153,7 @@ jobs:
 
           # Extracts the Opensearch version
           opensearch_version=$(bash scripts/opensearch_version.sh "setup") >> "$GITHUB_OUTPUT"
+          echo "opensearch_version=$opensearch_version" >> "$GITHUB_OUTPUT"
 
   compatibility-check:
     runs-on: ubuntu-24.04
