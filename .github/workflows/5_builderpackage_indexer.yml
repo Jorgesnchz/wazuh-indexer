@@ -79,7 +79,7 @@ on:
         type: boolean
         default: false
       id:
-        type: stringneeds.
+        type: string
         required: false
       wazuh_plugins_ref:
         type: string
