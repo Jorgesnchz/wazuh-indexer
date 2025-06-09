@@ -149,7 +149,7 @@ jobs:
         id: plugins_version
         run: |
           ls scripts/
-          echo "version=$(bash scripts/product_version.sh)" >> "$GITHUB_OUTPUT"
+          echo "version=$(bash ./scripts/product_version.sh)" >> "$GITHUB_OUTPUT"
 
           # Extracts the Opensearch version
           opensearch_version=$(bash scripts/opensearch_version.sh "setup") >> "$GITHUB_OUTPUT"
