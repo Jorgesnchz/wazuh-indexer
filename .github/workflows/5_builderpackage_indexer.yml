@@ -125,8 +125,6 @@ jobs:
       - name: Get Wazuh Indexer version
         id: version
         run: |
-          cd wazuh-indexer
-
           # Gets the Wazuh Indexer version from the product_version.sh script
           echo "version=$(bash ./build-scripts/product_version.sh)" >> "$GITHUB_OUTPUT"
 
