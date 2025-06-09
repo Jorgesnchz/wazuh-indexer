@@ -122,7 +122,7 @@ jobs:
       - name: Get Wazuh Indexer version
         id: version
         run: |
-          git clone --branch ""${GITHUB_REF#refs/heads/}" https://github.com/wazuh/wazuh-indexer.git
+          git clone --branch "${GITHUB_REF#refs/heads/}" https://github.com/wazuh/wazuh-indexer.git
           cd wazuh-indexer
 
           # Gets the Wazuh Indexer version from the product_version.sh script
