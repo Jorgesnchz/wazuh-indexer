@@ -118,7 +118,6 @@ permissions:
 jobs:
   compatibility-check:
     runs-on: ubuntu-24.04
-    id: check-compatibility
     steps:
       - name: Get Wazuh Indexer version
         id: version
@@ -159,7 +158,7 @@ jobs:
           fi
 
   setup:
-    needs: check-compatibility
+    needs: compatibility-check
     name: Set up variables
     runs-on: ubuntu-24.04
     outputs:
@@ -187,7 +186,7 @@ jobs:
           echo "previous_version=$PREVIOUS" >> $GITHUB_OUTPUT
 
   build-wazuh-plugins:
-    needs: check-compatibility
+    needs: compatibility-check
     if: ${{ inputs.wazuh_plugins_ref != '' }}
     strategy:
       fail-fast: false
