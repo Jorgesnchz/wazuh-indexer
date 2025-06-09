@@ -119,7 +119,8 @@ jobs:
   compatibility-check:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Wazuh Indexer repository
+        uses: actions/checkout@v4
 
       - name: Get Wazuh Indexer version
         id: version
@@ -133,7 +134,9 @@ jobs:
           opensearch_version=$(grep '^opensearch' ./buildSrc/version.properties | awk -F '=' '{print $2}' | tr -d ' ')
           echo "opensearch_version=$opensearch_version" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v4
+      - name: Checkout Wazuh Indexer plugins repository
+        if: ${{ inputs.wazuh_plugins_ref != '' }}
+        uses: actions/checkout@v4
         with:
           repository: wazuh/wazuh-indexer-plugins
           ref: ${{ inputs.wazuh_plugins_ref }}
