@@ -148,7 +148,7 @@ jobs:
       - name: Read versions from wazuh-indexer-plugins
         id: plugins_version
         run: |
-          ls
+          ls scripts/
           echo "version=$(bash scripts/product_version.sh)" >> "$GITHUB_OUTPUT"
 
           # Extracts the Opensearch version
