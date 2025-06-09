@@ -130,7 +130,9 @@ jobs:
 
           # Extracts the Opensearch version from buildSrc/version.properties
           opensearch_version= grep '^opensearch' ./buildSrc/version.properties | awk -F '=' '{print $2}' | tr -d ' '
-          echo "opensearch_version=$opensearch_version" >> "$GITHUB_OUTPUT"
+
+          echo $opensearch_version >> "$GITHUB_OUTPUT"
+          #echo "opensearch_version=$opensearch_version" >> "$GITHUB_OUTPUT"
 
 
       - name: Get Wazuh Indexer plugins version
