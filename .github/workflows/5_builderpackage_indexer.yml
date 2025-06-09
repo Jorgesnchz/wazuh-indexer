@@ -142,7 +142,6 @@ jobs:
       - name: Get Wazuh Indexer plugins version
         id: plugins_version
         run: |
-          cd wazuh-indexer-plugins/
           echo "plugins_version=$(jq .version -r VERSION.json)" >> "$GITHUB_OUTPUT"
 
           # Extracts the Opensearch version
