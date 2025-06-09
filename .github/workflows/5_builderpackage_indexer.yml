@@ -148,11 +148,10 @@ jobs:
       - name: Read versions from wazuh-indexer-plugins
         id: plugins_version
         run: |
-          echo "version=$(jq .version -r VERSION.json)" >> "$GITHUB_OUTPUT"
+          echo "version=$(bash ./scripts/product_version.sh)" >> "$GITHUB_OUTPUT"
 
           # Extracts the Opensearch version
-          opensearch_version=$(grep "opensearch_version =" "plugins/setup/build.gradle" | sed -E 's/.*System.getProperty\("opensearch\.version", "//' | sed -E 's/".*//' | sed -E 's/-SNAPSHOT$//')
-          echo "opensearch_version=$opensearch_version" >> "$GITHUB_OUTPUT"
+          opensearch_version=$(bash ./scripts/opensearch_version.sh) >> "$GITHUB_OUTPUT"
 
   compatibility-check:
     runs-on: ubuntu-24.04
