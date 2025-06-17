@@ -17,9 +17,8 @@ jobs:
           volumes: 
             - ${{ github.workspace }}/tools:/tools/
             - ${{ github.workspace }}/build-scripts/:/build-scripts/
-          steps:
-            - name: Run test script
-              run: |
-                bash /build-scripts/indexer_node_install.sh "4.12.0"
-                systemctl stop wazuh-indexer
-                bash /tools/test.sh
+                      
+        run: |
+          bash /build-scripts/indexer_node_install.sh "4.12.0"
+          systemctl stop wazuh-indexer
+          bash /tools/test.sh
