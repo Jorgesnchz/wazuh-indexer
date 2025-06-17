@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  # Test if docker loads 2 volumes correctly
   test-docker-rpm:
     runs-on: ubuntu-latest
     container: 
@@ -33,7 +32,9 @@ jobs:
   
 
   job-after:
-    needs: [test-docker-rpm || test-deb]
+    needs: [test-docker-rpm, test-deb]
+    if: |
+      needs.test-docker-rpm.result == 'success' || needs.test-deb.result == 'success'
     runs-on: ubuntu-latest
     steps:
     - name: print message
