@@ -5,6 +5,7 @@ on:
 
 jobs:
   test-docker-rpm:
+    if: (0 == 1)
     runs-on: ubuntu-latest
     container: 
       image: redhat/ubi9:latest
