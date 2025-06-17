@@ -11,14 +11,12 @@ jobs:
     - name: TESSSST
       container: 
         image: docker:latest
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-
-        - name: Test
-          run: |
-            echo "Testing Docker volumes"
-            bash tools/test.sh
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Test
+      run: |
+        echo "Testing Docker volumes"
+        bash tools/test.sh
   
   test-deb:
     runs-on: ubuntu-latest
