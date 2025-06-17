@@ -37,7 +37,7 @@ jobs:
       - test-docker-rpm
       - test-deb
     if: |
-      always() && needs.test-deb.result == 'success'
+      always() && needs.test-docker-rpm.result == 'success'
     runs-on: ubuntu-latest
     steps:
     - name: print message
