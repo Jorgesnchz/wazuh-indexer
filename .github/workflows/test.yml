@@ -6,6 +6,7 @@ on:
 jobs:
   test-docker-rpm:
     if: (0 == 1)
+    id: test-docker-rpm
     runs-on: ubuntu-latest
     container: 
       image: redhat/ubi9:latest
@@ -19,6 +20,7 @@ jobs:
         bash tools/test.sh
   
   test-deb:
+    id: test-deb
     runs-on: ubuntu-latest
     container: 
       image: debian:latest
@@ -33,9 +35,8 @@ jobs:
   
 
   job-after:
-    needs: [test-docker-rpm, test-deb]
     if: |
-      needs.test-docker-rpm.result == 'success' || needs.test-deb.result == 'success'
+      test-docker-rpm.conclusion == 'success' || test-deb.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
     - name: print message
