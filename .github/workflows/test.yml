@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: redhat/ubi9:latest
-                  
-    run: |
-      echo "Testing Docker volumes"
+    steps:   
+
+    - name: Test
+      run: |
+        echo "Testing Docker volumes"
