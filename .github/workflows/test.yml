@@ -11,14 +11,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Test RPM package update stopping the indexer
-        uses: addnab/docker-run-action@v3
-        with:
+      - name: Test Using github native action
+        container: 
           image: redhat/ubi9:latest
-          options: 
-            -v ${{ github.workspace }}/tools:/tools/
-            -v ${{ github.workspace }}/build-scripts/:/build-scripts/
-          run: |
-            bash /build-scripts/indexer_node_install.sh "4.12.0"
-            systemctl stop wazuh-indexer
-            bash /tools/test.sh 
+          volumes: 
+            - ${{ github.workspace }}/tools:/tools/
+            - ${{ github.workspace }}/build-scripts/:/build-scripts/
+          steps:
+            - name: Run test script
+              run: |
+                bash /build-scripts/indexer_node_install.sh "4.12.0"
+                systemctl stop wazuh-indexer
+                bash /tools/test.sh
