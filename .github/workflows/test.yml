@@ -6,6 +6,7 @@ on:
 jobs:
   # Test if docker loads 2 volumes correctly
   test-docker-volumes:
+    if: true
     runs-on: ubuntu-latest
     container: 
       image: redhat/ubi9:latest
