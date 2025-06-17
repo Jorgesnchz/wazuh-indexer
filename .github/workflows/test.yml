@@ -33,7 +33,9 @@ jobs:
   
 
   job-after:
-    
+    needs: 
+      - test-docker-rpm
+      - test-deb
     if: |
       test-docker-rpm.conclusion == 'success' || test-deb.conclusion == 'success'
     runs-on: ubuntu-latest
