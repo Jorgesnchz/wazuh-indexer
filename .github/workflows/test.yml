@@ -10,7 +10,10 @@ jobs:
     container: 
       image: redhat/ubi9:latest
     steps:   
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
     - name: Test
       run: |
         echo "Testing Docker volumes"
+        bash /tools/test.sh
