@@ -11,6 +11,9 @@ jobs:
     - name: TESSSST
       container: 
         image: docker:latest
+        run: | 
+          echo "Testing Docker volumes"
+          
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Test
