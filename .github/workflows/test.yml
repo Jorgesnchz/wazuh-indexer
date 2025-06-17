@@ -16,4 +16,5 @@ jobs:
     - name: Test
       run: |
         echo "Testing Docker volumes"
-        bash /tools/test.sh
+        ls
+        bash ${{ github.workspace }}/tools/test.sh
