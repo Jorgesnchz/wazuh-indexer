@@ -5,8 +5,7 @@ on:
 
 jobs:
   # Test if docker loads 2 volumes correctly
-  test-docker-volumes:
-    if: (0 == 1)
+  test-docker-rpm:
     runs-on: ubuntu-latest
     container: 
       image: redhat/ubi9:latest
@@ -18,3 +17,26 @@ jobs:
       run: |
         echo "Testing Docker volumes"
         bash tools/test.sh
+  
+  test-deb:
+    runs-on: ubuntu-latest
+    container: 
+      image: debian:latest
+    steps:   
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Test
+      run: |
+        echo "Testing Docker volumes"
+        bash tools/test.sh
+  
+
+  job-after:
+    needs: [test-docker-rpm || test-deb]
+    runs-on: ubuntu-latest
+    steps:
+    - name: print message
+      run: |
+        echo "This job runs after either test-docker-rpm or test-deb completes successfully."
+        echo "You can add more steps here to perform actions after the tests."
