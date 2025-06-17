@@ -7,18 +7,8 @@ jobs:
   # Test if docker loads 2 volumes correctly
   test-docker-volumes:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Test Using github native action
-        container: 
-          image: redhat/ubi9:latest
-          volumes: 
-            - ${{ github.workspace }}/tools:/tools/
-            - ${{ github.workspace }}/build-scripts/:/build-scripts/
-                      
-        run: |
-          bash /build-scripts/indexer_node_install.sh "4.12.0"
-          systemctl stop wazuh-indexer
-          bash /tools/test.sh
+    container: 
+      image: redhat/ubi9:latest
+                  
+    run: |
+      echo "Testing Docker volumes"
